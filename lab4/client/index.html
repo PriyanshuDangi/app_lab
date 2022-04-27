@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>LAB 4</title>
+    <style>
+        html {
+            background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+        }
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin: auto;
+        }
+
+        #button {
+            background-color: black;
+            color: #ffffff;
+            padding: 10px 35px;
+            
+        }
+
+        table div {
+            margin: auto;
+            border-bottom: 1px solid #ddd;
+            width: 50%;
+        }
+
+        table div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        td,
+        th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <center>
+        <h1>Table</h1>
+        <button id="button" type="button" onclick="loadDoc()">Load</button>
+        <br><br>
+        <table id="table"></table>
+    </center>
+
+    <script>
+        function loadDoc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    load(this);
+                }
+            };
+            xhttp.open("GET", "/books", true);
+            xhttp.send();
+        }
+
+        function loadParticular(index) {
+            console.log(index);
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    show(this);
+                }
+            };
+            xhttp.open("GET", "/books/" + index, true);
+            xhttp.send();
+        }
+
+        // loadDoc();
+        // loadParticular(0);
+
+        function show(xml) {
+            let data = JSON.parse(xml.responseText);
+
+            let table = '';
+
+            Object.keys(data).map((key) => {
+                if (key == 'cover') {
+                    table += `<div><img src=${data[key]} /></div>`;
+                } else {
+                    table += `<div> <span><b>${key}</b></span> &emsp; <span>${data[key]}</span> </div>`;
+                }
+            })
+
+            document.getElementById("table").innerHTML = table;
+        }
+
+        function load(xml) {
+            let data = JSON.parse(xml.responseText);
+
+            let table = `<tr><th>Book</th><th>Author</th><th>Price</th><th>Language</th></tr>`;
+
+            data.forEach((book, index) => {
+                table += `<tr><td>${book.title}</td><td>${book.author}</td><td>${book.year}</td><td>${book.language}</td><td><button onClick={loadParticular(${index})}>More</button></td></tr>`;
+            });
+
+            document.getElementById("table").innerHTML = table;
+        }
+    </script>
+
+</body>
+
+</html>

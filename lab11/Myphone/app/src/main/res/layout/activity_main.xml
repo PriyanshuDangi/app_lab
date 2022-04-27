@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Caller"
+        android:textColor="#E8630A"
+        android:textSize="35dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:id="@+id/input"
+        android:layout_centerVertical="true"
+        android:hint="Enter the phone number"
+        android:gravity="center"
+        android:textColorHint="#E8630A"
+        android:textColor="#E8630A"
+        android:textSize="25dp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:text="Call ☎"
+        android:textStyle="italic"
+        android:textColor="#E8630A"
+        android:textSize="25dp"
+        android:layout_below="@id/input"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:id="@+id/call"
+        />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="246dp"
+        app:srcCompat="@drawable/caller"
+        android:layout_marginTop="80dp"
+        />
+
+
+</RelativeLayout>
